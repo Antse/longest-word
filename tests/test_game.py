@@ -12,6 +12,11 @@ class TestGame(unittest.TestCase):
         for letter in grid:
             self.assertIn(letter, string.ascii_uppercase)
 
+    def test_is_valid_is_ok(self):
+        new_game = Game()
+        new_game.grid = ["A","B","C","K"]
+        self.assertEqual(new_game.is_valid("BACK"),True)
+
     def test_is_valid_is_empty(self):
         new_game = Game()
         new_game.grid = ["A","B","C"]
@@ -26,7 +31,6 @@ class TestGame(unittest.TestCase):
         new_game = Game()
         new_game.grid = ["A","B","C"]
         self.assertEqual(new_game.is_valid("AABBCC"),False)
-
 
 
     def test_unknown_word_is_invalid(self):

@@ -1,5 +1,6 @@
 import string
 import random
+import requests
 
 
 class Game():
@@ -14,16 +15,20 @@ class Game():
             self.grid.append(alphabet[indice])
 
     def is_valid(self, word):
-        temp_grid = self.grid
+        temp_grid = self.grid.copy()
+
+        if word == "":
+            return False
 
         for letter in word:
             if letter in temp_grid:
                 temp_grid.remove(letter)
             else:
                 return False
-        if word == "":
+
+        r = requests.get(f"https://wagon-dictionary.herokuapp.com/{word}")
+        if not r.json()["found"]:
             return False
-        if set(word) != set(self.grid):
-            return False
-        else:
-            return True
+
+        return True
+
