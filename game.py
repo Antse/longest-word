@@ -14,16 +14,16 @@ class Game():
             self.grid.append(alphabet[indice])
 
     def is_valid(self, word):
-        temp_grid = self.grid
+        temp_grid = self.grid.copy()
+
+        if word == "":
+            return False
 
         for letter in word:
             if letter in temp_grid:
                 temp_grid.remove(letter)
             else:
                 return False
-        if word == "":
-            return False
-        if set(word) != set(self.grid):
-            return False
-        else:
-            return True
+
+        return True
+
